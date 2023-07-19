@@ -2,13 +2,18 @@ import math
 import random
 
 class Race: 
-    def __init__(self, race_name, ability_score_increase, size, speed, languages, resistances):
-        self.race_name = race_name
+    def __init__(self, race_name: str, ability_score_increase: dict, size: str, speed:int, languages: list, resistances: list, darkvision: bool, weapon_proficiency: list, armour_training: list, tool_proficiency: list, additional_traits: dict):
+        self.name = race_name
         self.ability_score_increase = ability_score_increase
         self.size = size
         self.speed = speed
         self.languages = languages
         self.resistances = resistances
+        self.darkvision = darkvision
+        self.weapon_proficiency = weapon_proficiency
+        self.armour_training = armour_training
+        self.tool_proficiency = tool_proficiency
+        self.additional_traits = additional_traits
 
     def add_resitances(self, new_resistances):
         for resistance in new_resistances:
@@ -34,11 +39,13 @@ class Draconic_Ancestry:
         self.saving_throw = saving_throw  
 
 class Character:
+    proficiency_bonus = 2
+    armour_class = 10
+
+
     def __init__(self):
         self.ability_scores = {'str': 0, 'dex': 0, 'con': 0, 'wis': 0, 'int': 0, 'cha': 0}
         self.skills = []
-        self.armourClass = 10
-        self.proficiencyBonus = 2
 
     def add_race(self, race):
         self.race = race
@@ -81,8 +88,8 @@ def roll_random_ability_scores():
 
 ## Available races
 available_races = {
-    "dragonborn" : Race('Dragonborn', {'str': 2, 'cha': 1}, 'medium', 30, ['common', 'draconic'], []),
-    "mountain dwarf" : Race('Mountain Dwarf', {'str': 2, 'con': 2}, 'medium', 25, ['common', 'dwarvish'], ['poison'])
+    "dragonborn" : Race('Dragonborn', {'str': 2, 'cha': 1}, 'medium', 30, ['common', 'draconic'], [], False, [], [], [], {'breath weapon': 'You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation. When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level. After you use your breath weapon, you can\'t use it again until you complete a short or long rest.'}),
+    "mountain dwarf" : Race('Mountain Dwarf', {'str': 2, 'con': 2}, 'medium', 25, ['common', 'dwarvish'], ['poison'], False, ['battleaxe', 'handaxe', 'lighthammer', 'warhammer'], ['light', 'medium'], ['smith\'s tools', 'brewer\'s supplies', 'mason\'s tools'], {'dwarven resilience': 'You have advantage against saving throws against poison', 'stonecunning': 'Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.'})
 }
 
 ## Draconic Ancestries
@@ -124,6 +131,7 @@ while(not hasattr(player, 'race')):
                 chosen_ancestry = ancestries[chosen_ancestry]
                 ancestry = chosen_ancestry
                 chosen_race.add_resitances(chosen_ancestry.damage_resistance_type)
+                chosen_race.additional_traits['breath_weapon'] = ""
                 player.add_race(chosen_race)
                 print(f"A fine choice indeed. Your {chosen_ancestry.dragon_type.capitalize()} dragon lineage gives you resistance to {chosen_ancestry.damage_resistance_type} damage and a {chosen_ancestry.breath_weapon} {chosen_ancestry.damage_resistance_type} breath weapon.")
             else:
