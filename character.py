@@ -13,17 +13,28 @@ class Race:
     def add_resitances(self, new_resistances):
         for resistance in new_resistances:
             self.resistances.append(resistance)
+    
+    def __repr__(self):
+        string = self.race_name.capitalize() + ";"
+        for ability in self.ability_score_increase:
+            string += f" {ability} +{self.ability_score_increase[ability]}"
+        string += f"; size: {self.size}; speed: {self.speed}ft; speaks, reads, and writes:"
+        for lang in self.languages:
+            string += f" {lang}"
+        string += "; resistant to: "
+        for resistance in self.resistances:
+            string += resistance
+        return string
 
 class Draconic_Ancestry:
-    def __init__(self, dragon_type, damage_type, breath_weapon, saving_throw):
+    def __init__(self, dragon_type, damage_resistance_type, breath_weapon, saving_throw):
         self.dragon_type = dragon_type
-        self.damage_type = damage_type
+        self.damage_resistance_type = damage_resistance_type
         self.breath_weapon = breath_weapon     
         self.saving_throw = saving_throw  
 
 class Character:
     def __init__(self):
-        self.race = 'none'
         self.ability_scores = {'str': 0, 'dex': 0, 'con': 0, 'wis': 0, 'int': 0, 'cha': 0}
         self.skills = []
         self.armourClass = 10
@@ -69,8 +80,10 @@ def roll_random_ability_scores():
 
 
 ## Available races
-dragonborn = Race('Dragonborn', {'str': 2, 'cha': 1}, 'medium', 30, ['common', 'draconic'], [])
-mountain_dwarf = Race('Mountain Dwarf', {'str': 2, 'con': 2}, 'medium', 25, ['common', 'dwarvish'], ['poison'])
+available_races = {
+    "dragonborn" : Race('Dragonborn', {'str': 2, 'cha': 1}, 'medium', 30, ['common', 'draconic'], []),
+    "mountain dwarf" : Race('Mountain Dwarf', {'str': 2, 'con': 2}, 'medium', 25, ['common', 'dwarvish'], ['poison'])
+}
 
 ## Draconic Ancestries
 ancestries = {
@@ -89,28 +102,33 @@ ancestries = {
 player = Character()
 
 ## RACE ## 
-#chosen_race = input('Amidst the vast expanse of fantasy, which race shall thee assume on this odyssey? Choose wisely, for destiny eagerly awaits your decision. Enter the name of your chosen race: ')
-chosen_race = 'dragonborn'
+# chosen_race = 'mountain dwarf'
+while(not hasattr(player, 'race')):
+    chosen_race = input('Amidst the vast expanse of fantasy, which race shall thee assume on this odyssey? Choose wisely, for destiny eagerly awaits your decision. Enter the name of your chosen race: ')
+    if chosen_race == 'dragonborn':
+        chosen_race = available_races[chosen_race]
+        chosen_ancestry = 'none'
 
-if chosen_race == 'dragonborn':
+        print('Dragonborn of noble kin, reveal your Draconic Ancestry - Red, Blue, Black, or another? The power of your lineage awaits your answer. Available anceestries: ')
+        for ancestry in ancestries:
+            print(f"- {ancestry}")
+            
+        while (chosen_ancestry == 'none'):
+            chosen_ancestry = input('Enter your choice: ').lower()
 
-    dragonborn.ancestry = 'none'
-    player.add_race(dragonborn)
+            if chosen_ancestry in ancestries.keys():
+                chosen_ancestry = ancestries[chosen_ancestry]
+                ancestry = chosen_ancestry
+                chosen_race.add_resitances(chosen_ancestry.damage_resistance_type)
+                player.add_race(chosen_race)
+                print(f"A fine choice indeed. Your {chosen_ancestry.dragon_type.capitalize()} dragon lineage gives you resistance to {chosen_ancestry.damage_resistance_type} damage and a {chosen_ancestry.breath_weapon} {chosen_ancestry.damage_resistance_type} breath weapon.")
+            else:
+                print('You must select an ancestry from the list above')
+    else:
+        if(chosen_race in available_races):
+            player.add_race(available_races[chosen_race])
 
-    print('Dragonborn of noble kin, reveal your Draconic Ancestry - Red, Blue, Black, or another? The power of your lineage awaits your answer. Available anceestries: ')
-    for ancestry in ancestries:
-        print(f"- {ancestry}")
-        
-
-    while (player.race.ancestry == 'none'):
-        chosen_ancestry = input('Enter your choice: ').lower()
-
-        if chosen_ancestry in ancestries.keys():
-            chosen_ancestry = ancestries[chosen_ancestry]
-            player.race.ancestry = chosen_ancestry
-            print(f"A fine choice indeed. Your {chosen_ancestry.dragon_type.capitalize()} dragon lineage gives you resistance to {chosen_ancestry.damage_type} damage and a {chosen_ancestry.breath_weapon} {chosen_ancestry.damage_type} breath weapon.")
-        else:
-            print('You must select an ancestry from the list above')
+print(player.race)
 
 ## ABILITY SCORES ## 
 # decision = input('Do you want to manual enter your stats or have them rolled randomly? \n\nChoose: manual or random \n\n')
@@ -122,8 +140,8 @@ if decision == 'random':
 
     random_scores = roll_random_ability_scores()
     
-    for ability in random_scores:
-        print(f'{ability}: {random_scores[ability]}')
+    # for ability in random_scores:
+    #     print(f'{ability}: {random_scores[ability]}')
     
     player.update_ability_scores(random_scores)
 
