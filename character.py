@@ -19,6 +19,11 @@ class Race:
         for resistance in new_resistances:
             self.resistances.append(resistance)
     
+    # Iain - imo this __repr__ is pretty hard to read. 
+    # I asked ChatGPT for some suggestions and it's suggesting best practices are:
+    #  1. Use `join` instead of += to build strings
+    #  2. Iterate over items rather than keys
+    # See the commented out code block starting on line 39 for its suggestion
     def __repr__(self):
         string = self.name + ";"
         for ability in self.ability_score_increase:
@@ -30,6 +35,18 @@ class Race:
         for resistance in self.resistances:
             string += resistance
         return string
+
+    # def __repr__(self):
+    #     parts = [self.name]
+    #     parts.extend(f"{ability} +{increase}" for ability, increase in self.ability_score_increase.items())
+    #     parts.append(f"size: {self.size}")
+    #     parts.append(f"speed: {self.speed}ft")
+    #     parts.append("speaks, reads, and writes:")
+    #     parts.extend(self.languages)
+    #     parts.append("resistant to:")
+    #     parts.extend(self.resistances)
+    #     return "; ".join(parts)
+
 
 class Draconic_Ancestry:
     def __init__(self, dragon_type, damage_resistance_type, breath_weapon, saving_throw):
@@ -84,6 +101,9 @@ def roll_random_ability_scores():
 ## Available races
 # TODO: Player's must choose one tool proficiency from the given list in the dwarven races. Write relevant control flow. (include option for multiple choices?)
 available_races = {
+
+    # Iain - The race constructor has loads of parameters so this could be hard to keep track of based purely on position.
+    # Seems like a use case for Keyword Arguments?
     'dragonborn' : Race('Dragonborn', {'str': 2, 'cha': 1}, 'medium', 30, ['common', 'draconic'], [], False, [], [], [], {'breath weapon': 'You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation. When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level. After you use your breath weapon, you can\'t use it again until you complete a short or long rest.'}),
     'mountain dwarf' : Race('Mountain Dwarf', {'str': 2, 'con': 2}, 'medium', 25, ['common', 'dwarvish'], ['poison'], False, ['battleaxe', 'handaxe', 'lighthammer', 'warhammer'], ['light', 'medium'], ['smith\'s tools', 'brewer\'s supplies', 'mason\'s tools'], {'dwarven resilience': 'You have advantage against saving throws against poison', 'stonecunning': 'Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.'}),
     'hill dwarf': Race('Hill Dwarf', {'con': 2, 'wis': 1}, 'medium', 25, ['common, dwarvish'], ['poison'], True, ['battleaxe', 'handaxe', 'lighthammer', 'warhammer'], ['light', 'medium'], ['smith\'s tools', 'brewer\'s supplies', 'mason\'s tools'], {'dwarven resilience': 'You have advantage against saving throws against poison', 'stonecunning': 'Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.', 'Dwarven Toughness': 'Your hit point maximum increases by 1, and it increases by 1 every time you gain a level'})
@@ -103,6 +123,8 @@ ancestries = {
     'white'  : Draconic_Ancestry('white', 'cold', '15ft cone', 'con')
 }
 
+# Iain - Maybe everything from here down should live in its own file? Feels logical to me to separate the interactive character creation logic out.
+# That said, might be more hassle than its worth if it takes a lot of refactoring to do that.
 player = Character()
 
 ## RACE ## 
@@ -126,7 +148,15 @@ match chosen_race.name:
         print('Dragonborn of noble kin, reveal your Draconic Ancestry - Red, Blue, Black, or another? The power of your lineage awaits your answer. Available anceestries: ')
         for ancestry in ancestries:
             print(f"- {ancestry}")
-            
+
+        #  Iain - Maybe this is my java side coming through, but `while(true)` with a `break` feels less easy to immediately understand than using a flag
+        #  e.g. 
+        #  is_ancestry_selected = false
+        #  while(!is_ancestry_selected):
+        #      ...
+        #      if chosen_ancestry in ancestries.keys():
+        #          ...
+        #          is_ancestry_selected = true
         while(True):
             chosen_ancestry = input('Enter your choice: ').lower()
 
