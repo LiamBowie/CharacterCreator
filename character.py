@@ -103,8 +103,12 @@ player = Character()
 
 ## RACE ## 
 # chosen_race = 'mountain dwarf'
+print('Amidst the vast expanse of fantasy, which race shall thee assume on this odyssey? Choose wisely, for destiny eagerly awaits your decision.')
+for race in available_races:
+    print(f'- {race.capitalize()}')
+
 while(not hasattr(player, 'race')):
-    chosen_race = input('Amidst the vast expanse of fantasy, which race shall thee assume on this odyssey? Choose wisely, for destiny eagerly awaits your decision. Enter the name of your chosen race: ')
+    chosen_race = input('\nEnter the name of your chosen race: ').lower()
     if chosen_race == 'dragonborn':
         chosen_race = available_races[chosen_race]
         chosen_ancestry = 'none'
@@ -127,6 +131,8 @@ while(not hasattr(player, 'race')):
     else:
         if(chosen_race in available_races):
             player.add_race(available_races[chosen_race])
+        else: 
+            print('Please select a race from the list of available races.')
 
 print(player.race)
 
