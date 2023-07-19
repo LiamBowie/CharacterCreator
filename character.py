@@ -137,7 +137,7 @@ while(not hasattr(player, 'race')):
 print(player.race)
 
 ## ABILITY SCORES ## 
-# decision = input('Do you want to manual enter your stats or have them rolled randomly? \n\nChoose: manual or random \n\n')
+# decision = input('Do you want to manually enter your stats or have them rolled randomly? \n\nChoose: manual or random \n\n')
 decision = 'random'
 
 if decision == 'random':
