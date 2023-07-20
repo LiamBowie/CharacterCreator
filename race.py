@@ -1,5 +1,5 @@
 class Race: 
-    def __init__(self, race_name: str, ability_score_increase: dict, size: str, speed:int, lifespan:str, languages: list, resistances: list = [], darkvision: bool = False, weapon_proficiency: list = [], armour_training: list = [], tool_proficiency: list = [], additional_traits: dict = []):
+    def __init__(self, race_name: str, ability_score_increase: dict, size: str, speed:int, lifespan:str, languages: list, resistances: list = [], darkvision: bool = False, weapon_proficiency: list = [], armour_training: list = [], tool_proficiency: list = [], spells: list = [], additional_traits: dict = []):
         self.name = race_name
         self.ability_score_increase = ability_score_increase
         self.size = size
@@ -10,6 +10,7 @@ class Race:
         self.weapon_proficiency = weapon_proficiency
         self.armour_training = armour_training
         self.tool_proficiency = tool_proficiency
+        self.spells = spells
         self.additional_traits = additional_traits
 
     def add_resistances(self, new_resistances):
