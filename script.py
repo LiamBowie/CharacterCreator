@@ -18,12 +18,12 @@ while(choosing_race):
         
         choosing_race = False
     else: 
-        print('Please select a race from the list of available races.')
+        print('\nPlease select a race from the list of available races.')
 
 match chosen_race.name:
     case 'Dragonborn':
 
-        print('Dragonborn of noble kin, reveal your Draconic Ancestry - Red, Blue, Black, or another? The power of your lineage awaits your answer. Available anceestries: ')
+        print('\nDragonborn of noble kin, reveal your Draconic Ancestry - Red, Blue, Black, or another? The power of your lineage awaits your answer. Available anceestries: \n')
         for ancestry in draconic_ancestries:
             print(f"- {ancestry}")
 
@@ -41,19 +41,15 @@ match chosen_race.name:
                 
                 choosing_ancestry = False
             else:
-                print('You must select an ancestry from the list above')
+                print('You must select an ancestry from the list above\n')
     case 'Hill Dwarf':
         player.hit_points += player.level
         player.add_race(chosen_race)
     case _:
         player.add_race(chosen_race)
 
-
-print(player.race)
-
 ## STEP THREE: DETERMINE ABILITY SCORES ## 
-# decision = input('Do you want to manually enter your stats or have them rolled randomly? \n\nChoose: manual or random \n\n')
-decision = 'random'
+decision = input('\nDo you want to manually enter your stats or have them rolled randomly? \n\nChoose: manual or random \n\n')
 
 if decision == 'random':
 
@@ -61,7 +57,7 @@ if decision == 'random':
 
     random_scores = roll_random_ability_scores()
     
-    print('Abilities rolled:')
+    print('\nAttribute scores: ')
     for ability in random_scores:
         print(f'{ability}: {random_scores[ability]}')
     
@@ -93,6 +89,7 @@ elif decision == 'manual':
                 manual_scores[ability] = current_score
             else: 
                 print('\nYour score must be between 3 and 18\n')
+        
+    player.update_ability_scores(manual_scores)
 
-
-    #print(manual_scores)
+print(player)
