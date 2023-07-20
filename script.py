@@ -11,19 +11,17 @@ for race in available_races:
 
 choosing_race = True
 while(choosing_race):
-
     chosen_race = sanitize(input('Enter the name of your chosen race: '))
     if(chosen_race in available_races):
         chosen_race = available_races[chosen_race]
-        
         choosing_race = False
+
     else: 
         print('Please select a race from the list of available races.')
 
 match chosen_race.name:
     case 'Dragonborn':
-
-        print('Dragonborn of noble kin, reveal your Draconic Ancestry - Red, Blue, Black, or another? The power of your lineage awaits your answer. Available anceestries: ')
+        print('Reveal your Draconic Ancestry. The power of your lineage awaits your answer. Available anceestries: ')
         for ancestry in draconic_ancestries:
             print(f"- {ancestry}")
 
@@ -36,25 +34,26 @@ match chosen_race.name:
                 ancestry = chosen_ancestry
                 chosen_race.add_resistances(chosen_ancestry.damage_resistance_type)
                 player.add_race(chosen_race)
-                print(f"A fine choice indeed. Your {chosen_ancestry.dragon_type.capitalize()} dragon lineage gives you resistance to {chosen_ancestry.damage_resistance_type} damage and a {chosen_ancestry.breath_weapon} {chosen_ancestry.damage_resistance_type} breath weapon.")
-                
+                print(f"A fine choice indeed. Your {chosen_ancestry.dragon_type.capitalize()} dragon lineage gives you resistance to {chosen_ancestry.damage_resistance_type} damage and a {chosen_ancestry.breath_weapon} {chosen_ancestry.damage_resistance_type} breath weapon.") 
                 choosing_ancestry = False
+
             else:
                 print('You must select an ancestry from the list above')
+
     case 'Hill Dwarf':
         player.hit_points += player.level
         player.add_race(chosen_race)
+
     case _:
         player.add_race(chosen_race)
 
 ## STEP THREE: DETERMINE ABILITY SCORES ## 
 deciding = True
 while deciding:
-
     decision = sanitize(input('Do you want to manually enter your stats or have them rolled randomly? type manual or random: '))
+
     if decision == 'random':
         deciding = False
-        #print('\nBehold, as the ethereal dice dance upon the digital plane, conjuring a tapestry of randomly generated scores that shall define your character\'s inherent abilities.')
         random_scores = roll_random_ability_scores()
         player.update_ability_scores(random_scores)
 
@@ -72,7 +71,6 @@ while deciding:
         }
 
         for ability in manual_scores:
-
             while manual_scores[ability] == 0:
                 try: 
                     current_score = int(input(score_text[ability]))
