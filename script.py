@@ -1,6 +1,7 @@
 import random
 from race import Race, DraconicAncestry
 from character import Character
+from db import available_races, draconic_ancestries
 
 def roll_random_ability_scores():
     ability_scores = {'str': 0, 'dex': 0, 'con': 0, 'wis': 0, 'int': 0, 'cha': 0}
@@ -22,27 +23,6 @@ def roll_random_ability_scores():
 
     return ability_scores
 
-## Available races
-# TODO: Player's must choose one tool proficiency from the given list in the dwarven races. Write relevant control flow. (include option for multiple choices?)
-available_races = {
-    'dragonborn' : Race('Dragonborn', {'str': 2, 'cha': 1}, 'medium', 30, ['common', 'draconic'], [], False, [], [], [], {'breath weapon': 'You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation. When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level. After you use your breath weapon, you can\'t use it again until you complete a short or long rest.'}),
-    'mountain dwarf' : Race('Mountain Dwarf', {'str': 2, 'con': 2}, 'medium', 25, ['common', 'dwarvish'], ['poison'], False, ['battleaxe', 'handaxe', 'lighthammer', 'warhammer'], ['light', 'medium'], ['smith\'s tools', 'brewer\'s supplies', 'mason\'s tools'], {'dwarven resilience': 'You have advantage against saving throws against poison', 'stonecunning': 'Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.'}),
-    'hill dwarf': Race('Hill Dwarf', {'con': 2, 'wis': 1}, 'medium', 25, ['common, dwarvish'], ['poison'], True, ['battleaxe', 'handaxe', 'lighthammer', 'warhammer'], ['light', 'medium'], ['smith\'s tools', 'brewer\'s supplies', 'mason\'s tools'], {'dwarven resilience': 'You have advantage against saving throws against poison', 'stonecunning': 'Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.', 'Dwarven Toughness': 'Your hit point maximum increases by 1, and it increases by 1 every time you gain a level'})
-}
-
-## Draconic Ancestries
-ancestries = {
-    'black'  : DraconicAncestry('black', 'acid', '5 by 30ft line', 'dex'),
-    'blue'   : DraconicAncestry('blue', 'lightning', '5 by 30ft line', 'dex'),
-    'brass'  : DraconicAncestry('brass', 'fire', '5 by 30ft line', 'dex'),
-    'bronze' : DraconicAncestry('bronze', 'lightning', '5 by 30ft line', 'dex'),
-    'copper' : DraconicAncestry('copper', 'acid', '5 by 30ft line', 'dex'),
-    'gold'   : DraconicAncestry('gold', 'fire', '15ft cone', 'dex'),
-    'green'  : DraconicAncestry('green', 'poison', '15ft cone', 'con'),
-    'red'    : DraconicAncestry('red', 'fire', '15ft cone', 'dex'),
-    'silver' : DraconicAncestry('silver', 'cold', '15ft cone', 'con'),
-    'white'  : DraconicAncestry('white', 'cold', '15ft cone', 'con')
-}
 
 player = Character()
 
@@ -65,14 +45,14 @@ match chosen_race.name:
     case 'Dragonborn':
 
         print('Dragonborn of noble kin, reveal your Draconic Ancestry - Red, Blue, Black, or another? The power of your lineage awaits your answer. Available anceestries: ')
-        for ancestry in ancestries:
+        for ancestry in draconic_ancestries:
             print(f"- {ancestry}")
             
         while(True):
             chosen_ancestry = input('Enter your choice: ').lower()
 
-            if chosen_ancestry in ancestries.keys():
-                chosen_ancestry = ancestries[chosen_ancestry]
+            if chosen_ancestry in draconic_ancestries.keys():
+                chosen_ancestry = draconic_ancestries[chosen_ancestry]
                 ancestry = chosen_ancestry
                 chosen_race.add_resistances(chosen_ancestry.damage_resistance_type)
                 chosen_race.additional_traits['breath_weapon'] = ""
