@@ -49,47 +49,46 @@ match chosen_race.name:
         player.add_race(chosen_race)
 
 ## STEP THREE: DETERMINE ABILITY SCORES ## 
-decision = input('\nDo you want to manually enter your stats or have them rolled randomly? \n\nChoose: manual or random \n\n')
+decision = sanitize(input('\nDo you want to manually enter your stats or have them rolled randomly? \n\nChoose: manual or random \n'))
+deciding = True
+while deciding:
 
-if decision == 'random':
+    if decision == 'random':
+        deciding = False
+        #print('\nBehold, as the ethereal dice dance upon the digital plane, conjuring a tapestry of randomly generated scores that shall define your character\'s inherent abilities.')
+        random_scores = roll_random_ability_scores()
+        player.update_ability_scores(random_scores)
 
-    #print('\nBehold, as the ethereal dice dance upon the digital plane, conjuring a tapestry of randomly generated scores that shall define your character\'s inherent abilities.')
+    elif decision == 'manual':
+        deciding = False
+        print('\nRoll 4d6 and add the three highest together to obtain your ability scores.\n')
+        manual_scores = {'str': 0, 'dex': 0, 'con': 0, 'wis': 0, 'int': 0, 'cha': 0}
+        score_text = {
+            'str': 'Enter thy strength, mighty warrior, and reveal the power within (strength): ', 
+            'dex': 'Unveil the nimbleness that courses through thy veins, agile soul (dexterity): ', 
+            'con': 'Embrace the endurance that fortifies thy spirit, resilient hero (constitution): ', 
+            'wis': 'Tap into the wellspring of wisdom, wise sage, and share its depth (wisdom): ', 
+            'int': 'Let the flame of intelligence burn bright, cunning mind, as you disclose its brilliance (intelligence): ', 
+            'cha': 'Awaken the aura of charisma that captivates hearts, enchanting soul (charisma): '
+        }
 
-    random_scores = roll_random_ability_scores()
-    
-    print('\nAttribute scores: ')
-    for ability in random_scores:
-        print(f'{ability}: {random_scores[ability]}')
-    
-    player.update_ability_scores(random_scores)
+        for ability in manual_scores:
 
-elif decision == 'manual':
+            while manual_scores[ability] == 0:
+                try: 
+                    current_score = int(input(score_text[ability]))
+                except ValueError: 
+                    print('\nYou must enter a number\n')
 
-    print('\nRoll 4d6 and add the three highest together to obtain your ability scores.\n')
-
-    manual_scores = {'str': 0, 'dex': 0, 'con': 0, 'wis': 0, 'int': 0, 'cha': 0}
-    score_text = {
-        'str': 'Enter thy strength, mighty warrior, and reveal the power within (strength): ', 
-        'dex': 'Unveil the nimbleness that courses through thy veins, agile soul (dexterity): ', 
-        'con': 'Embrace the endurance that fortifies thy spirit, resilient hero (constitution): ', 
-        'wis': 'Tap into the wellspring of wisdom, wise sage, and share its depth (wisdom): ', 
-        'int': 'Let the flame of intelligence burn bright, cunning mind, as you disclose its brilliance (intelligence): ', 
-        'cha': 'Awaken the aura of charisma that captivates hearts, enchanting soul (charisma): '
-    }
-
-    for ability in manual_scores:
-
-        while manual_scores[ability] == 0:
-            try: 
-                current_score = int(input(score_text[ability]))
-            except ValueError: 
-                print('\nYou must enter a number\n')
-
-            if current_score in range(3, 19):
-                manual_scores[ability] = current_score
-            else: 
-                print('\nYour score must be between 3 and 18\n')
+                if current_score in range(3, 19):
+                    manual_scores[ability] = current_score
+                else: 
+                    print('\nYour score must be between 3 and 18\n')
+            
+        player.update_ability_scores(manual_scores)
         
-    player.update_ability_scores(manual_scores)
+    else:
+        decision = sanitize(input('Please enter "manual" or "random": '))
 
+print('\n')
 print(player)
