@@ -13,20 +13,18 @@ class Race:
         self.additional_traits = additional_traits
 
     def add_resistances(self, new_resistances):
-        for resistance in new_resistances:
-            self.resistances.append(resistance)
+        self.resistances.append(new_resistances)
     
     def __repr__(self):
-        string = self.name + ";"
-        for ability in self.ability_score_increase:
-            string += f" {ability} +{self.ability_score_increase[ability]}"
-        string += f"; size: {self.size}; speed: {self.speed}ft; speaks, reads, and writes:"
-        for lang in self.languages:
-            string += f" {lang}"
-        string += "; resistant to: "
-        for resistance in self.resistances:
-            string += resistance
-        return string
+        parts = [self.name]
+        parts.extend(f"{ability} +{increase}" for ability, increase in self.ability_score_increase.items())
+        parts.append(f"size: {self.size}")
+        parts.append(f"speed: {self.speed}ft")
+        parts.append("speaks, reads, and writes:")
+        parts.extend(self.languages)
+        parts.append("resistant to:")
+        parts.extend(self.resistances)
+        return " ".join(parts)
     
 class DraconicAncestry:
     def __init__(self, dragon_type, damage_resistance_type, breath_weapon, saving_throw):
