@@ -31,7 +31,7 @@ class Race:
             string += resistance
         return string
 
-class Draconic_Ancestry:
+class DraconicAncestry:
     def __init__(self, dragon_type, damage_resistance_type, breath_weapon, saving_throw):
         self.dragon_type = dragon_type
         self.damage_resistance_type = damage_resistance_type
@@ -91,16 +91,16 @@ available_races = {
 
 ## Draconic Ancestries
 ancestries = {
-    'black'  : Draconic_Ancestry('black', 'acid', '5 by 30ft line', 'dex'),
-    'blue'   : Draconic_Ancestry('blue', 'lightning', '5 by 30ft line', 'dex'),
-    'brass'  : Draconic_Ancestry('brass', 'fire', '5 by 30ft line', 'dex'),
-    'bronze' : Draconic_Ancestry('bronze', 'lightning', '5 by 30ft line', 'dex'),
-    'copper' : Draconic_Ancestry('copper', 'acid', '5 by 30ft line', 'dex'),
-    'gold'   : Draconic_Ancestry('gold', 'fire', '15ft cone', 'dex'),
-    'green'  : Draconic_Ancestry('green', 'poison', '15ft cone', 'con'),
-    'red'    : Draconic_Ancestry('red', 'fire', '15ft cone', 'dex'),
-    'silver' : Draconic_Ancestry('silver', 'cold', '15ft cone', 'con'),
-    'white'  : Draconic_Ancestry('white', 'cold', '15ft cone', 'con')
+    'black'  : DraconicAncestry('black', 'acid', '5 by 30ft line', 'dex'),
+    'blue'   : DraconicAncestry('blue', 'lightning', '5 by 30ft line', 'dex'),
+    'brass'  : DraconicAncestry('brass', 'fire', '5 by 30ft line', 'dex'),
+    'bronze' : DraconicAncestry('bronze', 'lightning', '5 by 30ft line', 'dex'),
+    'copper' : DraconicAncestry('copper', 'acid', '5 by 30ft line', 'dex'),
+    'gold'   : DraconicAncestry('gold', 'fire', '15ft cone', 'dex'),
+    'green'  : DraconicAncestry('green', 'poison', '15ft cone', 'con'),
+    'red'    : DraconicAncestry('red', 'fire', '15ft cone', 'dex'),
+    'silver' : DraconicAncestry('silver', 'cold', '15ft cone', 'con'),
+    'white'  : DraconicAncestry('white', 'cold', '15ft cone', 'con')
 }
 
 player = Character()
