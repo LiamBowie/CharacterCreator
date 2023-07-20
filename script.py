@@ -4,17 +4,19 @@ from db import available_races, draconic_ancestries
 
 player = Character()
 
-## RACE ## 
-# chosen_race = 'mountain dwarf'
+## STEP ONE: CHOOSING A RACE ## 
 print('Amidst the vast expanse of fantasy, which race shall thee assume on this odyssey? Choose wisely, for destiny eagerly awaits your decision.')
 for race in available_races:
     print(f'- {race.capitalize()}')
 
-while(True):
+choosing_race = True
+while(choosing_race):
+
     chosen_race = sanitize(input('\nEnter the name of your chosen race: '))
     if(chosen_race in available_races):
         chosen_race = available_races[chosen_race]
-        break
+        
+        choosing_race = False
     else: 
         print('Please select a race from the list of available races.')
 
@@ -24,8 +26,9 @@ match chosen_race.name:
         print('Dragonborn of noble kin, reveal your Draconic Ancestry - Red, Blue, Black, or another? The power of your lineage awaits your answer. Available anceestries: ')
         for ancestry in draconic_ancestries:
             print(f"- {ancestry}")
-            
-        while(True):
+
+        choosing_ancestry = True 
+        while(choosing_ancestry):
             chosen_ancestry = sanitize(input('Enter your choice: '))
 
             if chosen_ancestry in draconic_ancestries.keys():
@@ -35,7 +38,8 @@ match chosen_race.name:
                 chosen_race.additional_traits['breath_weapon'] = ""
                 player.add_race(chosen_race)
                 print(f"A fine choice indeed. Your {chosen_ancestry.dragon_type.capitalize()} dragon lineage gives you resistance to {chosen_ancestry.damage_resistance_type} damage and a {chosen_ancestry.breath_weapon} {chosen_ancestry.damage_resistance_type} breath weapon.")
-                break
+                
+                choosing_ancestry = False
             else:
                 print('You must select an ancestry from the list above')
     case 'Hill Dwarf':
@@ -47,7 +51,7 @@ match chosen_race.name:
 
 print(player.race)
 
-## ABILITY SCORES ## 
+## STEP THREE: DETERMINE ABILITY SCORES ## 
 # decision = input('Do you want to manually enter your stats or have them rolled randomly? \n\nChoose: manual or random \n\n')
 decision = 'random'
 
