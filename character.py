@@ -66,7 +66,7 @@ class Character:
         if self.spells:
             parts.append('Spells known:')
             parts.extend(f'- {spell.capitalize()}' for spell in self.spells)
-        parts.append('traits:')
+        parts.append('Traits:')
         parts.extend(f'{title.capitalize()}. {description}' for title, description in self.traits.items())
         
         return '\n'.join(parts)

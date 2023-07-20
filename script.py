@@ -12,18 +12,18 @@ for race in available_races:
 choosing_race = True
 while(choosing_race):
 
-    chosen_race = sanitize(input('\nEnter the name of your chosen race: '))
+    chosen_race = sanitize(input('Enter the name of your chosen race: '))
     if(chosen_race in available_races):
         chosen_race = available_races[chosen_race]
         
         choosing_race = False
     else: 
-        print('\nPlease select a race from the list of available races.')
+        print('Please select a race from the list of available races.')
 
 match chosen_race.name:
     case 'Dragonborn':
 
-        print('\nDragonborn of noble kin, reveal your Draconic Ancestry - Red, Blue, Black, or another? The power of your lineage awaits your answer. Available anceestries: \n')
+        print('Dragonborn of noble kin, reveal your Draconic Ancestry - Red, Blue, Black, or another? The power of your lineage awaits your answer. Available anceestries: ')
         for ancestry in draconic_ancestries:
             print(f"- {ancestry}")
 
@@ -35,13 +35,12 @@ match chosen_race.name:
                 chosen_ancestry = draconic_ancestries[chosen_ancestry]
                 ancestry = chosen_ancestry
                 chosen_race.add_resistances(chosen_ancestry.damage_resistance_type)
-                chosen_race.additional_traits['breath_weapon'] = ""
                 player.add_race(chosen_race)
                 print(f"A fine choice indeed. Your {chosen_ancestry.dragon_type.capitalize()} dragon lineage gives you resistance to {chosen_ancestry.damage_resistance_type} damage and a {chosen_ancestry.breath_weapon} {chosen_ancestry.damage_resistance_type} breath weapon.")
                 
                 choosing_ancestry = False
             else:
-                print('You must select an ancestry from the list above\n')
+                print('You must select an ancestry from the list above')
     case 'Hill Dwarf':
         player.hit_points += player.level
         player.add_race(chosen_race)
@@ -49,10 +48,10 @@ match chosen_race.name:
         player.add_race(chosen_race)
 
 ## STEP THREE: DETERMINE ABILITY SCORES ## 
-decision = sanitize(input('\nDo you want to manually enter your stats or have them rolled randomly? \n\nChoose: manual or random \n'))
 deciding = True
 while deciding:
 
+    decision = sanitize(input('Do you want to manually enter your stats or have them rolled randomly? type manual or random: '))
     if decision == 'random':
         deciding = False
         #print('\nBehold, as the ethereal dice dance upon the digital plane, conjuring a tapestry of randomly generated scores that shall define your character\'s inherent abilities.')
@@ -61,7 +60,7 @@ while deciding:
 
     elif decision == 'manual':
         deciding = False
-        print('\nRoll 4d6 and add the three highest together to obtain your ability scores.\n')
+        print('Roll 4d6 and add the three highest together to obtain your ability scores.')
         manual_scores = {'str': 0, 'dex': 0, 'con': 0, 'wis': 0, 'int': 0, 'cha': 0}
         score_text = {
             'str': 'Enter thy strength, mighty warrior, and reveal the power within (strength): ', 
@@ -83,7 +82,7 @@ while deciding:
                 if current_score in range(3, 19):
                     manual_scores[ability] = current_score
                 else: 
-                    print('\nYour score must be between 3 and 18\n')
+                    print('Your score must be between 3 and 18')
             
         player.update_ability_scores(manual_scores)
         
