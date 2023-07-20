@@ -18,14 +18,46 @@ class Race:
     
     def __repr__(self):
         parts = [self.name]
-        parts.extend(f"{ability} +{increase}" for ability, increase in self.ability_score_increase.items())
-        parts.append(f"size: {self.size}")
-        parts.append(f"speed: {self.speed}ft")
-        parts.append("speaks, reads, and writes:")
-        parts.extend(self.languages)
-        parts.append("resistant to:")
-        parts.extend(self.resistances)
-        return " ".join(parts)
+        parts.extend(f'{ability} +{increase}' for ability, increase in self.ability_score_increase.items())
+        parts.append(f'size: {self.size}')
+        parts.append(f'speed: {self.speed}ft')
+        parts.append('speaks, reads, and writes:')
+        parts.extend(f'- {language}' for language in self.languages)
+        if(self.darkvision):
+            parts.append('Darkvision')
+
+        if(self.resistances):
+            parts.append('resistant to:')
+            parts.extend(f'- {resistance}' for resistance in self.resistances)
+        else: 
+            parts.append('No resistances')
+
+        if(self.weapon_proficiency):
+            parts.append('Weapon proficiencies:')
+            parts.extend(f'- {proficiency}' for proficiency in self.weapon_proficiency)
+        else:
+            parts.append('No weapon proficiencies')
+        
+        if(self.armour_training):
+            parts.append('Armour training:')
+            parts.extend(f'- {armour_type}' for armour_type in self.armour_training)
+        else:
+            parts.append('No armour training')
+            
+        if(self.tool_proficiency):
+            parts.append('Tool proficiencies:')
+            parts.extend(f'- {tools}' for tools in self.tool_proficiency)
+        else:
+            parts.append('No tool proficiencies')
+        
+        if(self.spells):
+            parts.append('Spells known:')
+            parts.extend(f'- {spell}' for spell in self.spells)
+
+        parts.append('Additional traits:')
+        parts.extend(f'{title}. {description}' for title, description in self.additional_traits.items())
+        
+        return "\n".join(parts)
     
 class DraconicAncestry:
     def __init__(self, dragon_type, damage_resistance_type, breath_weapon, saving_throw):
