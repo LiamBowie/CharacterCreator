@@ -31,8 +31,18 @@ class Character:
         self.spells = spells
         self.traits = traits
 
+    def __repr__(self):
+        return (
+            f"Character(name='{self.name}', level={self.level}, proficiency_bonus={self.proficiency_bonus}, "
+            f"armour_class={self.armour_class}, hit_points={self.hit_points}, ability_scores={self.ability_scores}, "
+            f"race='{self.race}', size='{self.size}', speed={self.speed}, languages={self.languages}, "
+            f"darkvision={self.darkvision}, resistances={self.resistances}, weapon_proficiency={self.weapon_proficiency}, "
+            f"armour_training={self.armour_training}, tool_proficiency={self.tool_proficiency}, spells={self.spells}, "
+            f"traits={self.traits})"
+        )
+
     def add_race(self, race):
-        self.race = race
+        self.race = race.name
         for ability in race.ability_score_increase:
             self.ability_scores[ability] += race.ability_score_increase[ability]
         self.size = race.size
