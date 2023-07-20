@@ -1,28 +1,6 @@
-import random
-from race import Race, DraconicAncestry
 from character import Character
+from util import roll_random_ability_scores, sanitize
 from db import available_races, draconic_ancestries
-
-def roll_random_ability_scores():
-    ability_scores = {'str': 0, 'dex': 0, 'con': 0, 'wis': 0, 'int': 0, 'cha': 0}
-
-    # For each player characters abilities  
-    for ability in ability_scores:
-        rolls = []
-        # roll a six sided dice four times and save each value.
-        for i in range(4):
-            rolls.append(random.randint(1, 6))
-        
-        # sort the rolls into ascending order and drop the lowest value. 
-        rolls.sort()
-        rolls.pop(0)
-
-        # Add the remaining rolls to get the final score and add that to the scores dictionary 
-        finalScore = sum(rolls)
-        ability_scores[ability] = finalScore
-
-    return ability_scores
-
 
 player = Character()
 
@@ -33,8 +11,7 @@ for race in available_races:
     print(f'- {race.capitalize()}')
 
 while(True):
-    chosen_race = input('\nEnter the name of your chosen race: ').lower()
-
+    chosen_race = sanitize(input('\nEnter the name of your chosen race: '))
     if(chosen_race in available_races):
         chosen_race = available_races[chosen_race]
         break
@@ -49,7 +26,7 @@ match chosen_race.name:
             print(f"- {ancestry}")
             
         while(True):
-            chosen_ancestry = input('Enter your choice: ').lower()
+            chosen_ancestry = sanitize(input('Enter your choice: '))
 
             if chosen_ancestry in draconic_ancestries.keys():
                 chosen_ancestry = draconic_ancestries[chosen_ancestry]
