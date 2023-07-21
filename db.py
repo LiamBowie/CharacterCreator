@@ -1,6 +1,7 @@
 from race import Race, DraconicAncestry
+from char_class import CharClass
 
-available_races = {
+races = {
     'dragonborn' : Race(
         race_name='Dragonborn', 
         ability_score_increase={'str': 2, 'cha': 1}, 
@@ -78,4 +79,18 @@ draconic_ancestries = {
     'red'    : DraconicAncestry('red', 'fire', '15ft cone', 'dex'),
     'silver' : DraconicAncestry('silver', 'cold', '15ft cone', 'con'),
     'white'  : DraconicAncestry('white', 'cold', '15ft cone', 'con')
+}
+
+classes = {
+    'barbarian': CharClass(
+        name='Barbarian',
+        hit_dice=12,
+        saving_throws=['str', 'con'],
+        available_skills=['animal handling', 'athletics', 'intimidation', 'nature', 'perception', 'survival'],
+        no_of_skills=2,
+        starting_equipment=[['greataxe', 'any martial weapon'], ['two handaxes', 'any simple weapon'], ['explorer\'s pack'], ['four javelins'] ],
+        gold_xd4=2,
+        armour_training=['light', 'medium', 'shields'],
+        weapon_prof=['simple', 'martial']
+    )
 }

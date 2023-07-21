@@ -1,19 +1,19 @@
 from character import Character
 from util import roll_random_ability_scores, sanitize
-from db import available_races, draconic_ancestries
+from db import races, draconic_ancestries
 
 player = Character()
 
 ## STEP ONE: CHOOSING A RACE ## 
 print('Amidst the vast expanse of fantasy, which race shall thee assume on this odyssey? Choose wisely, for destiny eagerly awaits your decision.')
-for race in available_races:
+for race in races:
     print(f'- {race.capitalize()}')
 
 choosing_race = True
 while(choosing_race):
     chosen_race = sanitize(input('Enter the name of your chosen race: '))
-    if(chosen_race in available_races):
-        chosen_race = available_races[chosen_race]
+    if(chosen_race in races):
+        chosen_race = races[chosen_race]
         choosing_race = False
 
     else: 
