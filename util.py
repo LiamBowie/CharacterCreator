@@ -20,5 +20,16 @@ def roll_random_ability_scores():
 
     return ability_scores
 
+def roll(dice:str):
+    split = dice.split('d')
+    no_of_dice = int(split[0])
+    no_of_faces = int(split[1])
+    final_value = 0
+    for roll in range(no_of_dice):
+        value = random.randint(1, no_of_faces)
+        final_value += value 
+        
+    return final_value
+
 def sanitize(input):
     return input.lower().strip()
