@@ -1,6 +1,6 @@
 from race import Race, DraconicAncestry
 from char_class import CharClass
-from util import append_lists, remove_item_from_list
+from util import remove_item_from_list
 from weapon import Weapon
 
 races = {
@@ -466,16 +466,13 @@ classes = {
         saving_throws=['str', 'con'],
         available_skills=['animal handling', 'athletics', 'intimidation', 'nature', 'perception', 'survival'],
         no_of_skills=2,
-        starting_equipment=[
+        starting_equipment_choices=[
                 get_weapon_keys_by_category('martial melee'), 
                 ['two handaxes'] + remove_item_from_list('handaxe', get_weapon_keys_by_category('simple melee')), 
-                ['explorer\'s pack'], 
-                ['four javelins']
             ],
+        starting_equipment_given=['explorer\'s pack', 'four javelins'],
         gold_dice='2d4',
         armour_training=['light', 'medium', 'shields'],
         weapon_prof=['simple', 'martial']
     )
 }
-
-print(classes['barbarian'].starting_equipment)
