@@ -1,5 +1,4 @@
 import random
-from db import weapons
 
 def roll_random_ability_scores():
     ability_scores = {'str': 0, 'dex': 0, 'con': 0, 'wis': 0, 'int': 0, 'cha': 0}
@@ -32,12 +31,10 @@ def roll(dice:str):
         
     return final_value
 
-def get_weapons_by_category(category):
-    result = []
-    for key, weapon in weapons.items():
-        if weapon.category == category:
-            result.append(weapons[key])
-    return result
+def remove_item_from_list(item_to_remove, list):
+    if item_to_remove in list:
+        list.remove(item_to_remove)
+    return list
 
 def sanitize(input):
     return input.lower().strip()

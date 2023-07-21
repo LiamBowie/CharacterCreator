@@ -1,5 +1,6 @@
 from race import Race, DraconicAncestry
 from char_class import CharClass
+from util import append_lists, remove_item_from_list
 from weapon import Weapon
 
 races = {
@@ -80,20 +81,6 @@ draconic_ancestries = {
     'red'    : DraconicAncestry('red', 'fire', '15ft cone', 'dex'),
     'silver' : DraconicAncestry('silver', 'cold', '15ft cone', 'con'),
     'white'  : DraconicAncestry('white', 'cold', '15ft cone', 'con')
-}
-
-classes = {
-    'barbarian': CharClass(
-        name='Barbarian',
-        hit_dice=12,
-        saving_throws=['str', 'con'],
-        available_skills=['animal handling', 'athletics', 'intimidation', 'nature', 'perception', 'survival'],
-        no_of_skills=2,
-        starting_equipment=[['greataxe', 'any martial weapon'], ['two handaxes', 'any simple weapon'], ['explorer\'s pack'], ['four javelins'] ],
-        gold_dice='2d4',
-        armour_training=['light', 'medium', 'shields'],
-        weapon_prof=['simple', 'martial']
-    )
 }
 
 weapons = {
@@ -464,3 +451,31 @@ weapons = {
         properties=['special', 'thrown', 'range(5/15)']
     )
 }
+
+def get_weapon_keys_by_category(category):
+    result = []
+    for key, weapon in weapons.items():
+        if weapon.category == category:
+            result.append(key)
+    return result
+
+classes = {
+    'barbarian': CharClass(
+        name='Barbarian',
+        hit_dice=12,
+        saving_throws=['str', 'con'],
+        available_skills=['animal handling', 'athletics', 'intimidation', 'nature', 'perception', 'survival'],
+        no_of_skills=2,
+        starting_equipment=[
+                get_weapon_keys_by_category('martial melee'), 
+                ['two handaxes'] + remove_item_from_list('handaxe', get_weapon_keys_by_category('simple melee')), 
+                ['explorer\'s pack'], 
+                ['four javelins']
+            ],
+        gold_dice='2d4',
+        armour_training=['light', 'medium', 'shields'],
+        weapon_prof=['simple', 'martial']
+    )
+}
+
+print(classes['barbarian'].starting_equipment)
