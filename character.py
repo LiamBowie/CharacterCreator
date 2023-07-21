@@ -3,11 +3,6 @@ import math
 starting_scores = {'str': 0, 'dex': 0, 'con': 0, 'wis': 0, 'int': 0, 'cha': 0}
 
 class Character:
-    level = 1
-    proficiency_bonus = 2
-    armour_class = 10
-    hit_points = 0
-
     def __init__(self, name:str = '', level:int = 1, proficiency_bonus:int = 2, armour_class:int = 10, 
                  hit_points:int = 0, ability_scores:dict = starting_scores, initiative:int = 0, race:str = '', size:str = '',
                  speed:int = 0, languages:list = [],  darkvision:bool = False, resistances:list = [],
