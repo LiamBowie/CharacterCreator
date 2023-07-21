@@ -90,7 +90,7 @@ classes = {
         available_skills=['animal handling', 'athletics', 'intimidation', 'nature', 'perception', 'survival'],
         no_of_skills=2,
         starting_equipment=[['greataxe', 'any martial weapon'], ['two handaxes', 'any simple weapon'], ['explorer\'s pack'], ['four javelins'] ],
-        gold_xd4=2,
+        gold_dice='2d4',
         armour_training=['light', 'medium', 'shields'],
         weapon_prof=['simple', 'martial']
     )
