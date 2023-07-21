@@ -1,5 +1,6 @@
 from race import Race, DraconicAncestry
 from char_class import CharClass
+from weapon import Weapon
 
 races = {
     'dragonborn' : Race(
@@ -92,5 +93,374 @@ classes = {
         gold_xd4=2,
         armour_training=['light', 'medium', 'shields'],
         weapon_prof=['simple', 'martial']
+    )
+}
+
+weapons = {
+    'club': Weapon(
+        name='Club',
+        category='simple melee',
+        cost_amount=1,
+        cost_denomination='sp',
+        damage_dice='1d4',
+        damage_type='bludgeoning',
+        weight_in_lbs=2,
+        properties=['light']
+    ),
+    'dagger': Weapon(
+        name='Dagger',
+        category='simple melee',
+        cost_amount=2,
+        cost_denomination='gp',
+        damage_dice='1d4',
+        damage_type='piercing',
+        weight_in_lbs=1,
+        properties=['finesse', 'light', 'range(20/60)']
+    ),
+    'greatclub': Weapon(
+        name='Greatclub',
+        category='simple melee',
+        cost_amount=2,
+        cost_denomination='sp',
+        damage_dice='1d8',
+        damage_type='bludgeoning',
+        weight_in_lbs=10,
+        properties=['two-handed']
+    ),
+    'handaxe': Weapon(
+        name='Handaxe',
+        category='simple melee',
+        cost_amount=5,
+        cost_denomination='gp',
+        damage_dice='1d6',
+        damage_type='slashing',
+        weight_in_lbs=2,
+        properties=['light', 'range(20/60)']
+    ),
+    'javelin': Weapon(
+        name='Javelin',
+        category='simple melee',
+        cost_amount=5,
+        cost_denomination='sp',
+        damage_dice='1d6',
+        damage_type='piercing',
+        weight_in_lbs=2,
+        properties=['range(20/60)']
+    ),
+    'light hammer': Weapon(
+        name='Light hammer',
+        category='simple melee',
+        cost_amount=2,
+        cost_denomination='gp',
+        damage_dice='1d4',
+        damage_type='bludgeoning',
+        weight_in_lbs=2,
+        properties=['light', 'range(20/60)', 'versatile(1d8)']
+    ),
+    'mace':  Weapon(
+        name='Mace',
+        category='simple melee',
+        cost_amount=5,
+        cost_denomination='gp',
+        damage_dice='1d6',
+        damage_type='bludgeoning',
+        weight_in_lbs=4,
+    ),
+    'quarterstaff':  Weapon(
+        name='Quarterstaff',
+        category='simple melee',
+        cost_amount=2,
+        cost_denomination='sp',
+        damage_dice='1d6',
+        damage_type='bludgeoning',
+        weight_in_lbs=4,
+        properties=['versatile(1d8)']
+    ),
+    'sickle': Weapon(
+        name='Sickle',
+        category='simple melee',
+        cost_amount=1,
+        cost_denomination='gp',
+        damage_dice='1d4',
+        damage_type='slashing',
+        weight_in_lbs=2,
+        properties=['light']
+    ),
+    'spear': Weapon(
+        name='Spear',
+        category='simple melee',
+        cost_amount=1,
+        cost_denomination='gp',
+        damage_dice='1d6',
+        damage_type='piercing',
+        weight_in_lbs=0,
+        properties=['range(20/60)', 'versatile(1d8)']
+    ),
+    'light crossbow': Weapon(
+        name='Light crossbow',
+        category='simple ranged',
+        cost_amount=25,
+        cost_denomination='gp',
+        damage_dice='1d8',
+        damage_type='piercing',
+        weight_in_lbs=5,
+        properties=['ammunition', 'range(80/320)', 'loading', 'two-handed']
+    ),
+    'dart': Weapon(
+        name='Dart',
+        category='simple ranged',
+        cost_amount=5,
+        cost_denomination='cp',
+        damage_dice='1d4',
+        damage_type='piercing',
+        weight_in_lbs=0.25,
+        properties=['finesse', 'range(20/60)']
+    ),
+    'shortbow': Weapon(
+        name='Shortbow',
+        category='simple ranged',
+        cost_amount=25,
+        cost_denomination='gp',
+        damage_dice='1d8',
+        damage_type='piercing',
+        weight_in_lbs=2,
+        properties=['ammunition', 'range(80/320)', 'two-handed']
+    ),
+    'sling': Weapon(
+        name='Sling',
+        category='simple ranged',
+        cost_amount=1,
+        cost_denomination='sp',
+        damage_dice='1d4',
+        damage_type='bludgeoning',
+        weight_in_lbs=0,
+        properties=['ammunition', 'range(30/120)']
+    ),
+    'battleaxe': Weapon(
+        name='Battleaxe',
+        category='martial melee',
+        cost_amount=10,
+        cost_denomination='gp',
+        damage_dice='1d8',
+        damage_type='slashing',
+        weight_in_lbs=4,
+        properties=['versatile(1d10)']
+    ),
+    'flail': Weapon(
+        name='Flail',
+        category='martial melee',
+        cost_amount=10,
+        cost_denomination='gp',
+        damage_dice='1d8',
+        damage_type='bludgeoning',
+        weight_in_lbs=2
+    ),
+    'glaive': Weapon(
+        name='Glaive',
+        category='martial melee',
+        cost_amount=20,
+        cost_denomination='gp',
+        damage_dice='1d10',
+        damage_type='slashing',
+        weight_in_lbs=6,
+        properties=['heavy', 'reach', 'two-handed']
+    ),
+    'greataxe': Weapon(
+        name='Greataxe',
+        category='martial melee',
+        cost_amount=30,
+        cost_denomination='gp',
+        damage_dice='1d12',
+        damage_type='slashing',
+        weight_in_lbs=7,
+        properties=['heavy', 'two-handed']
+    ),
+    'greatsword': Weapon(
+        name='Greatsword',
+        category='martial melee',
+        cost_amount=50,
+        cost_denomination='gp',
+        damage_dice='2d6',
+        damage_type='slashing',
+        weight_in_lbs=6,
+        properties=['heavy', 'two-handed']
+    ),
+    'halberd': Weapon(
+        name='Halberd',
+        category='martial melee',
+        cost_amount=20,
+        cost_denomination='gp',
+        damage_dice='1d10',
+        damage_type='slashing',
+        weight_in_lbs=6,
+        properties=['heavy', 'reach', 'two-handed']
+    ),
+    'lance': Weapon(
+        name='Lance',
+        category='martial melee',
+        cost_amount=10,
+        cost_denomination='gp',
+        damage_dice='1d12',
+        damage_type='piercing',
+        weight_in_lbs=6,
+        properties=['reach', 'special']
+    ),
+    'longsword': Weapon(
+        name='Longsword',
+        category='martial melee',
+        cost_amount=15,
+        cost_denomination='gp',
+        damage_dice='1d8',
+        damage_type='slashing',
+        weight_in_lbs=3,
+        properties=['versatile(1d10)']
+    ),
+    'maul': Weapon(
+        name='Maul',
+        category='martial melee',
+        cost_amount=10,
+        cost_denomination='gp',
+        damage_dice='2d6',
+        damage_type='bludgeoning',
+        weight_in_lbs=10,
+        properties=['heavy', 'two-handed']
+    ),
+    'morningstar': Weapon(
+        name='Morningstar',
+        category='martial melee',
+        cost_amount=15,
+        cost_denomination='gp',
+        damage_dice='1d8',
+        damage_type='piercing',
+        weight_in_lbs=4
+    ),
+    'pike': Weapon(
+        name='Pike',
+        category='martial melee',
+        cost_amount=5,
+        cost_denomination='gp',
+        damage_dice='1d10',
+        damage_type='piercing',
+        weight_in_lbs=18,
+        properties=['heavy', 'reach', 'two-handed']
+    ),
+    'rapier': Weapon(
+        name='Rapier',
+        category='martial melee',
+        cost_amount=25,
+        cost_denomination='gp',
+        damage_dice='1d8',
+        damage_type='piercing',
+        weight_in_lbs=2,
+        properties=['finesse']
+    ),
+    'scimitar': Weapon(
+        name='Scimitar',
+        category='martial melee',
+        cost_amount=25,
+        cost_denomination='gp',
+        damage_dice='1d6',
+        damage_type='slashing',
+        weight_in_lbs=3,
+        properties=['finesse', 'light']
+    ),
+    'shortsword': Weapon(
+        name='Shortsword',
+        category='martial melee',
+        cost_amount=10,
+        cost_denomination='gp',
+        damage_dice='1d6',
+        damage_type='piercing',
+        weight_in_lbs=2,
+        properties=['finesse', 'light']
+    ),
+    'trident': Weapon(
+        name='Trident',
+        category='martial melee',
+        cost_amount=5,
+        cost_denomination='gp',
+        damage_dice='1d6',
+        damage_type='piercing',
+        weight_in_lbs=4,
+        properties=['range(20/60)', 'versatile(1d8)']
+    ),
+    'war pick': Weapon(
+        name='War pick',
+        category='martial melee',
+        cost_amount=5,
+        cost_denomination='gp',
+        damage_dice='1d8',
+        damage_type='piercing',
+        weight_in_lbs=2
+    ),
+    'warhammer': Weapon(
+        name='Warhammer',
+        category='martial melee',
+        cost_amount=15,
+        cost_denomination='gp',
+        damage_dice='1d8',
+        damage_type='bludgeoning',
+        weight_in_lbs=2,
+        properties=['versatile(1d10)']
+    ),
+    'whip': Weapon(
+        name='Whip',
+        category='martial melee',
+        cost_amount=2,
+        cost_denomination='gp',
+        damage_dice='1d4',
+        damage_type='slashing',
+        weight_in_lbs=3,
+        properties=['finesse', 'reach']
+    ),
+    'blowgun': Weapon(
+        name='Blowgun',
+        category='martial ranged',
+        cost_amount=10,
+        cost_denomination='gp',
+        damage_dice='1d1',
+        damage_type='piercing',
+        weight_in_lbs=1,
+        properties=['ammunition', 'range(25/100)', 'loading']
+    ),
+    'hand crossbow': Weapon(
+        name='Hand crossbow',
+        category='martial ranged',
+        cost_amount=75,
+        cost_denomination='gp',
+        damage_dice='1d6',
+        damage_type='piercing',
+        weight_in_lbs=3,
+        properties=['ammunition', 'range(30/120)', 'light', 'loading']
+    ),
+    'heavy crossbow': Weapon(
+        name='Heavy crossbow',
+        category='martial ranged',
+        cost_amount=50,
+        cost_denomination='gp',
+        damage_dice='1d10',
+        damage_type='piercing',
+        weight_in_lbs=18,
+        properties=['ammunition', 'range(100/400)', 'heavy', 'loading', 'two-handed']
+    ),
+    'longbow': Weapon(
+        name='Longbow',
+        category='martial ranged',
+        cost_amount=50,
+        cost_denomination='gp',
+        damage_dice='1d8',
+        damage_type='piercing',
+        weight_in_lbs=2,
+        properties=['ammunition', 'range(150/600)', 'heavy', 'two-handed']
+    ),
+    'net': Weapon(
+        name='Net',
+        category='martial ranged',
+        cost_amount=1,
+        cost_denomination='gp',
+        damage_dice='0d0',
+        damage_type='',
+        weight_in_lbs=3,
+        properties=['special', 'thrown', 'range(5/15)']
     )
 }
