@@ -11,3 +11,12 @@ class Weapon:
         self.damage_type = damage_type
         self.weight_in_lbs = weight_in_lbs
         self.properties = properties
+
+    def __repr__(self):
+        parts = [self.name]
+        parts.append(f'{self.category} weapon')
+        parts.append(f'{self.cost_amount}{self.cost_denomination}')
+        parts.append(f'{self.damage_dice} {self.damage_type} damage')
+        parts.append(f'{self.weight_in_lbs}lbs')
+        parts.extend(self.properties)
+        return ', '.join(parts)
