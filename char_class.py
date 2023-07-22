@@ -5,7 +5,7 @@ class CharClass:
     def __init__(self, name:str, hit_dice:int, saving_throws:list, available_skills:list, 
                  no_of_skills:int, starting_equipment_choices:list, starting_equipment_given:list,
                  gold_dice:str, gold_multiplier:bool = True, armour_training:list = [], 
-                 weapon_prof:list = [], tool_prof:list = []):
+                 weapon_prof:list = [], tool_prof:list = [], features:dict = []):
         self.name = name
         self.hit_dice = hit_dice
         self.saving_throws = saving_throws
@@ -18,6 +18,7 @@ class CharClass:
         self.armour_training = armour_training
         self.weapon_prof = weapon_prof
         self.tool_prof = tool_prof
+        self.features = features
     
     def __repr__(self):
         parts = [f'Class: {self.name}']

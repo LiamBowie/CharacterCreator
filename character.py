@@ -108,6 +108,7 @@ class Character:
         self.armour_training.extend(armour for armour in character_class.armour_training if armour not in self.armour_training)
         self.weapon_proficiency.extend(prof for prof in character_class.weapon_prof if prof not in self.weapon_proficiency)
         self.tool_proficiency.extend(tools for tools in character_class.tool_prof if tools not in self.tool_proficiency)
+        self.traits.update(character_class.features)
 
     def set_initiative(self):
         self.initiative = self.get_modifier('dex')
