@@ -7,7 +7,7 @@ class Character:
     def __init__(self, name:str = '', level:int = 1, proficiency_bonus:int = 2, armour_class:int = 10, 
                  hit_points:int = 0, hit_dice:int = 0, ability_scores:dict = starting_scores, saving_throws:list = [],
                  skills:list = [], initiative:int = 0, race:str = '', character_class = '', size:str = '',
-                 speed:int = 0, languages:list = [],  darkvision:bool = False, resistances:list = [],
+                 speed:int = 0, languages:list = [],  resistances:list = [],
                  weapon_proficiency:list = [], armour_training:list = [], tool_proficiency:list = [],
                  spells:list = [], traits:dict = {}, equipment:list = []):
         self.name = name
@@ -25,7 +25,6 @@ class Character:
         self.size = size
         self.speed = speed
         self.languages = languages
-        self.darkvision = darkvision
         self.resistances = resistances
         self.weapon_proficiency = weapon_proficiency
         self.armour_training = armour_training
@@ -45,8 +44,6 @@ class Character:
         parts.extend(saving_throw for saving_throw in self.saving_throws)
         parts.append('Skills:')
         parts.extend(skill for skill in self.skills)
-        if self.darkvision:
-            parts.append(f'Darkvision')
         parts.append('Speaks, reads, and writes:')
         parts.extend(f'- {language.capitalize()}' for language in self.languages)
         if self.resistances:
