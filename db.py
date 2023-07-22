@@ -476,7 +476,7 @@ classes = {
         starting_equipment_given=['explorer\'s pack', 'four javelins'],
         gold_dice='2d4',
         armour_training=['light', 'medium', 'shields'],
-        weapon_prof=['simple', 'martial'],
+        weapon_prof=['simple melee', 'simple ranged', 'martial melee', 'martial ranged'],
         features={
             'rage': 
     '''In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.
@@ -505,7 +505,7 @@ classes = {
         starting_equipment_given=['leather armour', 'dagger'],
         gold_dice='5d4',
         armour_training=['light'],
-        weapon_prof=['simple', 'hand crossbow', 'longsword', 'rapier', 'shortsword'],
+        weapon_prof=['simple melee', 'simple ranged', 'hand crossbow', 'longsword', 'rapier', 'shortsword'],
         tool_prof=['Three musical instruments of your choice'],
         features={
             'bardic inspiration': 
@@ -515,6 +515,77 @@ classes = {
     Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.'''
         }
     ),
+    'cleric': CharClass(
+        name='Cleric',
+        hit_dice=8,
+        saving_throws=['wis', 'cha'],
+        available_skills=['history', 'insight', 'medecine', 'persuasion', 'religion'],
+        no_of_skills=2,
+        starting_equipment_choices=[
+            ['mace', 'warhammer' ], # warhammer if proficient
+            ['scale mail', 'leather armour', 'chain mail'], # chain mail if proficient
+            ['light crossbow, 20 bolts'] + get_weapon_keys_by_category('simple melee') + get_weapon_keys_by_category('simple ranged'),
+            ['priest\'s pack', 'explorer\'s pack']
+        ],
+        starting_equipment_given=['shield', 'holy symbol'],
+        gold_dice='5d4',
+        armour_training=['light', 'medium', 'shields'],
+        weapon_prof=['simple melee', 'simple ranged']
+    ),
+    'druid': CharClass(
+        name='Druid',
+        hit_dice=8,
+        saving_throws=['int', 'wis'],
+        available_skills=['arcana', 'animal handling', 'insight', 'medecine', 'nature', 'perception', 'religion', 'survival'],
+        no_of_skills=2,
+        starting_equipment_choices=[
+            ['shield'] + get_weapon_keys_by_category('simple melee'),
+            ['scimitar'] + get_weapon_keys_by_category('simple melee') + get_weapon_keys_by_category('simple ranged')
+        ],
+        starting_equipment_given=['leather armour', 'explorer\'s pack', 'druidic focus'],
+        gold_dice='2d4',
+        armour_training=['light', 'medium', 'shields'],
+        weapon_prof=['clubs', 'daggers', 'darts', 'javelins', 'maces', 'quarterstaffs', 'scimitars', 'sickles', 'slings', 'spears'],
+        tool_prof=['herbalism kit'],
+        features={
+            'druidic': 'You know Druidic, the secret language of druids. You can speak the language and use it to leave hidden messages. You and others who know this language automatically spot such a message. Others spot the message\'s presence with a successful DC 15 Wisdom (Perception) check but can\'t decipher it without magic.'
+        }
+    ),
+    # 'fighter': CharClass(
+    #     name='Fighter',
+    #     hit_dice=10,
+    #     saving_throws=['str', 'con']
+    # ),
+    # 'monk': CharClass(
+    #     name='Monk',
+    #     hit_dice=8,
+    #     saving_throws=['str', 'dex']
+    # ),
+    # 'paladin': CharClass(
+    #     name='Paladin',
+    #     hit_dice=10, 
+    #     saving_throws=['wis', 'cha']
+    # ),
+    # 'ranger': CharClass(
+    #     name='Ranger',
+    #     hit_dice=10,
+    #     saving_throws=['str', 'dex']
+    # ),
+    # 'rogue': CharClass(
+    #     name='Rogue',
+    #     hit_dice=8,
+    #     saving_throws=['dex', 'int']
+    # ),
+    # 'sorcerer': CharClass(
+    #     name='Sorcerer',
+    #     hit_dice=6,
+    #     saving_throws=['con', 'cha']
+    # ),
+    # 'warlock': CharClass(
+    #     name='Warlock',
+    #     hit_dice=8,
+    #     saving_throws=['wis', 'cha']
+    # ),
     'wizard': CharClass(
         name="Wizard",
         hit_dice=6,
