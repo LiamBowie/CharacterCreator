@@ -1,5 +1,5 @@
 from character import Character
-from util import roll_random_ability_scores, sanitize
+from util import roll_random_ability_scores, sanitize, roll
 from db import races, draconic_ancestries, classes
 
 player = Character()
@@ -98,6 +98,38 @@ while count < chosen_class.no_of_skills:
         player.skills.append(chosen_skill)
         count += 1
     
+# Choosing equipment
+print('Would you like to choose your starting equipment or recieve starting gold?')
+choosing_gold_or_equipment = True
+gold_or_equipment = ''
+while choosing_gold_or_equipment:
+    gold_or_equipment = sanitize(input('Type gold or equipment: '))
+
+    if gold_or_equipment == 'gold' or gold_or_equipment == 'equipment':
+        choosing_gold_or_equipment = False
+
+if gold_or_equipment == 'gold':
+    player.starting_gold = roll(chosen_class.gold_dice) * 10 if chosen_class.gold_multiplier else roll(chosen_class.gold_dice)
+    print(player.starting_gold)
+
+elif gold_or_equipment == 'equipment':
+    print('Choose one of the following: ')
+    for choice in chosen_class.starting_equipment_choices:
+        string = ['']
+        for item in choice:
+            string.append(f'-{item} ')
+        print(''.join(string))
+        equipment_choice = ''
+        choosing_equipment = True
+        while choosing_equipment:
+            equipment_choice = sanitize(input('I choose: '))
+            if equipment_choice not in choice:
+                print('Choose an item from the list')
+            else:
+                choosing_equipment = False
+        player.equipment.append(equipment_choice)
+    
+    player.equipment.extend(chosen_class.starting_equipment_given)
 
 ## STEP THREE: DETERMINE ABILITY SCORES ## 
 # Deciding whether to input ability scores manually or have them rolled randomly
@@ -147,6 +179,5 @@ elif input_method == 'manual':
 
     
 
-player.add_class(classes['barbarian'], [], [])
 print('\n')
 print(player) # Debugging and testing. 
