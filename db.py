@@ -478,7 +478,16 @@ classes = {
         armour_training=['light', 'medium', 'shields'],
         weapon_prof=['simple', 'martial'],
         features={
-            'rage': 'In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\n    While raging, you gain the following benefits if you aren\'t wearing heavy armor:\n    1. You have advantage on Strength checks and Strength saving throws.\n    2. When you make a melee weapon attack using Strength, you gain a +2 bonus to the damage roll. This bonus increases as you level.\n    3. You have resistance to bludgeoning, piercing, and slashing damage.\n    If you are able to cast spells, you can\'t cast them or concentrate on them while raging.\n    Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven\'t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\n    Once you have raged the maximum number of times for your barbarian level, you must finish a long rest before you can rage again. You may rage 2 times at 1st level, 3 at 3rd, 4 at 6th, 5 at 12th, and 6 at 17th.',
+            'rage': 
+    '''In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.
+    While raging, you gain the following benefits if you aren\'t wearing heavy armor:
+        1. You have advantage on Strength checks and Strength saving throws.
+        2. When you make a melee weapon attack using Strength, you gain a +2 bonus to the damage roll. This bonus increases as you level.
+        3. You have resistance to bludgeoning, piercing, and slashing damage.
+    If you are able to cast spells, you can\'t cast them or concentrate on them while raging.
+    Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven\'t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.
+    Once you have raged the maximum number of times for your barbarian level, you must finish a long rest before you can rage again. You may rage 2 times at 1st level, 3 at 3rd, 4 at 6th, 5 at 12th, and 6 at 17th.
+        ''',
             'unarmoured defence': 'While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.'
         }
     ),
@@ -499,14 +508,30 @@ classes = {
         weapon_prof=['simple', 'hand crossbow', 'longsword', 'rapier', 'shortsword'],
         tool_prof=['Three musical instruments of your choice'],
         features={
-            'bardic inspiration': '''You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6.
-
-Once within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the DM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time.
-
-You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest.
-
-Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.
-'''
+            'bardic inspiration': 
+    '''You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6. 
+    Once within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the DM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time.
+    You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest.
+    Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.'''
         }
+    ),
+    'wizard': CharClass(
+        name="Wizard",
+        hit_dice=6,
+        saving_throws=['int', 'wis'],
+        available_skills=['arcana', 'history', 'insight', 'investigation', 'medecine', 'religion'],
+        no_of_skills=2,
+        starting_equipment_choices=[
+            ['quarterstaff', 'dagger'],#
+            ['component pouch', 'arcane focus'],
+            ['scholar\'s pack', 'explorer\'s pack']
+        ],
+        starting_equipment_given=["spellbook"],
+        gold_dice="4d4",
+        weapon_prof=["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"],
+        features={"Arcane Recovery": 
+    '''You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher. 
+    For example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. 
+    You can recover either a 2nd-level spell slot or two 1st-level spell slots.'''},
     )
 }
