@@ -64,6 +64,22 @@ match chosen_race.name:
     case _:
         player.add_race(chosen_race)
 
+## STEP TWO: CHOOSE A CLASS ##
+print('Descriptive text about choosing classes')
+for c in classes:
+    print(f'- {c.capitalize()}')
+
+choosing_class = True
+while choosing_class:
+
+    chosen_class = sanitize(input('Enter your class: '))
+
+    if chosen_class in classes:
+        chosen_class = classes[chosen_class]
+        choosing_class = False
+    else:
+        print ('Select a class from the list above')
+
 ## STEP THREE: DETERMINE ABILITY SCORES ## 
 # Deciding whether to input ability scores manually or have them rolled randomly
 deciding = True
