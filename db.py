@@ -491,6 +491,7 @@ classes = {
             'unarmoured defence': 'While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.'
         }
     ),
+    # TODO: Spellcasting
     'bard': CharClass(
         name='Bard',
         hit_dice=8,
@@ -515,6 +516,7 @@ classes = {
     Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.'''
         }
     ),
+    # TODO: Divine domain and spellcasting
     'cleric': CharClass(
         name='Cleric',
         hit_dice=8,
@@ -532,6 +534,7 @@ classes = {
         armour_training=['light', 'medium', 'shields'],
         weapon_prof=['simple melee', 'simple ranged']
     ),
+    # TODO: Spellcasting
     'druid': CharClass(
         name='Druid',
         hit_dice=8,
@@ -551,41 +554,194 @@ classes = {
             'druidic': 'You know Druidic, the secret language of druids. You can speak the language and use it to leave hidden messages. You and others who know this language automatically spot such a message. Others spot the message\'s presence with a successful DC 15 Wisdom (Perception) check but can\'t decipher it without magic.'
         }
     ),
-    # 'fighter': CharClass(
-    #     name='Fighter',
-    #     hit_dice=10,
-    #     saving_throws=['str', 'con']
-    # ),
-    # 'monk': CharClass(
-    #     name='Monk',
-    #     hit_dice=8,
-    #     saving_throws=['str', 'dex']
-    # ),
-    # 'paladin': CharClass(
-    #     name='Paladin',
-    #     hit_dice=10, 
-    #     saving_throws=['wis', 'cha']
-    # ),
-    # 'ranger': CharClass(
-    #     name='Ranger',
-    #     hit_dice=10,
-    #     saving_throws=['str', 'dex']
-    # ),
-    # 'rogue': CharClass(
-    #     name='Rogue',
-    #     hit_dice=8,
-    #     saving_throws=['dex', 'int']
-    # ),
-    # 'sorcerer': CharClass(
-    #     name='Sorcerer',
-    #     hit_dice=6,
-    #     saving_throws=['con', 'cha']
-    # ),
-    # 'warlock': CharClass(
-    #     name='Warlock',
-    #     hit_dice=8,
-    #     saving_throws=['wis', 'cha']
-    # ),
+    # TODO: Fighting styles
+    'fighter': CharClass(
+        name='Fighter',
+        hit_dice=10,
+        saving_throws=['str', 'con'],
+        available_skills=['acrobatics', 'animal handling', 'athletics', 'history', 'insight', 'intimidation', 'perception', 'survival'],
+        no_of_skills=2,
+        starting_equipment_choices=[
+            ['chain mail', 'leather armour, longbow, 20 arrows'],
+            ['martial weapon, shield', 'two martial weapons'],
+            ['light crossbow, 20 bolts', 'two handaxes'],
+            ['dungeoneer\'s pack', 'explorer\'s pack']
+        ],
+        starting_equipment_given=[],
+        gold_dice='5d4',
+        armour_training=['light', 'medium', 'heavy', 'shields'],
+        weapon_prof=['simple melee', 'simple ranged', 'martial melee', 'martial ranged'],
+        features={
+            'second wind': 
+    '''You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.
+    Once you use this feature, you must finish a short or long rest before you can use it again.'''        
+        }
+    ),
+    # TODO: unarmoured defence alters stats
+    'monk': CharClass(
+        name='Monk',
+        hit_dice=8,
+        saving_throws=['str', 'dex'],
+        available_skills=['acrobatics', 'athletics', 'history', 'insight', 'religion', 'stealth'],
+        no_of_skills=2,
+        starting_equipment_choices=[
+            ['shortsword'] + get_weapon_keys_by_category('simple melee') + get_weapon_keys_by_category('simple ranged'),
+            ['dungeoneer\'s pack', 'explorer\'s pack']
+        ],
+        starting_equipment_given=['10 darts'],
+        gold_dice='5d4',
+        gold_multiplier=False,
+        weapon_prof=['simple melee', 'simple ranged', 'shortswords'],
+        tool_prof=['any one type of artisan\'s tools or any one musical instrument of your choice'],
+        features={
+            'unarmoured defence': 'Beginning at 1st level, while you are wearing no armor and not wielding a shield, your AC equals 10 + your Dexterity modifier + your Wisdom modifier.',
+            'martial arts':
+    '''Your practice of martial arts gives you mastery of combat styles that use unarmed strikes and monk weapons, which are shortswords and any simple melee weapons that don't have the two-handed or heavy property.
+
+    You gain the following benefits while you are unarmed or wielding only monk weapons and you aren't wearing armor or wielding a shield.
+
+    - You can use Dexterity instead of Strength for the attack and damage rolls of your unarmed strikes and monk weapons.
+    - You can roll a d4 in place of the normal damage of your unarmed strike or monk weapon. This die changes as you gain monk levels, as shown in the Martial Arts column of the Monk table.
+    - When you use the Attack action with an unarmed strike or a monk weapon on your turn, you can make one unarmed strike as a bonus action. For example, if you take the Attack action and attack with a quarterstaff, you can also make an unarmed strike as a bonus action, assuming you haven't already taken a bonus action this turn.
+    Certain monasteries use specialized forms of the monk weapons. For example, you might use a club that is two lengths of wood connected by a short chain (called a nunchaku) or a sickle with a shorter, straighter blade (called a kama).'''
+        }
+    ),
+    'paladin': CharClass(
+        name='Paladin',
+        hit_dice=10, 
+        saving_throws=['wis', 'cha'],
+        available_skills=['athletics', 'insight', 'intimidation', 'medecine', 'persuasion', 'religion'], 
+        no_of_skills=2,
+        starting_equipment_choices=[
+            ['a martial weapon and a shield', 'two martial weapons'],
+            ['five javelins'] + get_weapon_keys_by_category('simple melee') + get_weapon_keys_by_category('simple ranged'),
+            ['priest\'s pack', 'explorer\'s pack']
+        ],
+        starting_equipment_given=['chain mail', 'holy symbol'],
+        gold_dice='5d4',
+        armour_training=['light', 'medium', 'heavy', 'shields'],
+        weapon_prof=['simple melee', 'simple ranged', 'martial melee', 'martial ranged'],
+        features={
+            'divine sense': 
+    '''The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears. As an action, you can open your awareness to detect such forces. Until the end of your next turn, you know the location of any celestial, fiend, or undead within 60 feet of you that is not behind total cover. You know the type (celestial, fiend, or undead) of any being whose presence you sense, but not its identity (the vampire Count Strahd von Zarovich, for instance). Within the same radius, you also detect the presence of any place or object that has been consecrated or desecrated, as with the hallow spell.
+
+    You can use this feature a number of times equal to 1 + your Charisma modifier. When you finish a long rest, you regain all expended uses.''',
+            'lay on hands':
+    '''Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest. With that pool, you can restore a total number of hit points equal to your paladin level × 5.
+
+    As an action, you can touch a creature and draw power from the pool to restore a number of hit points to that creature, up to the maximum amount remaining in your pool.
+
+    Alternatively, you can expend 5 hit points from your pool of healing to cure the target of one disease or neutralize one poison affecting it. You can cure multiple diseases and neutralize multiple poisons with a single use of Lay on Hands, expending hit points separately for each one.
+
+    This feature has no effect on undead and constructs.'''
+        }
+    ),
+    'ranger': CharClass(
+        name='Ranger',
+        hit_dice=10,
+        saving_throws=['str', 'dex'],
+        available_skills=['animal handling', 'athletics', 'insignt', 'investigation', 'nature', 'perception', 'stealth', 'survival'],
+        no_of_skills=3,
+        starting_equipment_choices=[
+            ['scale mail', 'leather armour'], 
+            ['two shortdwords', 'two simple melee weapons'],
+            ['dungeoneer\'s pack', 'explorer\'s pack']
+        ],
+        starting_equipment_given=['longbow', '20 arrows'],
+        gold_dice='5d4',
+        armour_training=['light', 'medium', 'shields'],
+        weapon_prof=['simple melee', 'simple ranged', 'martial melee', 'martial ranged'],
+        features={
+            'favoured enemy': 
+    '''Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.
+
+    Choose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as gnolls and orcs) as favored enemies.
+
+    You have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.
+
+    When you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all.
+
+    You choose one additional favored enemy, as well as an associated language, at 6th and 14th level. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures.''',
+            'natural explorer':
+    '''Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.
+
+    Choose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as gnolls and orcs) as favored enemies.
+
+    You have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.
+
+    When you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all.
+
+    You choose one additional favored enemy, as well as an associated language, at 6th and 14th level. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures.'''
+        }
+    ),
+    'rogue': CharClass(
+        name='Rogue',
+        hit_dice=8,
+        saving_throws=['dex', 'int'],
+        available_skills=['acrobatics', 'athletics', 'deception', 'insight', 'intimidation', 'investigation', 'perception', 'performance', 'persuasion', 'sleight of hand', 'stealth'],
+        no_of_skills=4,
+        starting_equipment_choices=[
+            ['rapier', 'shortsword'], 
+            ['shortbow, 20 arrows', 'shortsword'], 
+            ['burglar\'s packs', 'dungeoneer\'s pack', 'explorer\'s pack']
+        ],
+        starting_equipment_given=['leather armour', 'dagger', 'dagger', 'thieve\'s tools'],
+        gold_dice='4d4',
+        armour_training=['light'],
+        weapon_prof=['simple', 'hand crossbow', 'longsword', 'rapier', 'shortsword'],
+        tool_prof=['thieve\'s tools'],
+        features={
+            'expertise': 
+    '''At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with thieves' tools. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.
+
+    At 6th level, you can choose two more of your proficiencies (in skills or with thieves' tools) to gain this benefit.''',
+            'sneak attack': 
+    '''Beginning at 1st level, you know how to strike subtly and exploit a foe's distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.
+
+    You don't need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn't incapacitated, and you don't have disadvantage on the attack roll.
+
+    The amount of the extra damage increases as you gain levels in this class, as shown in the Sneak Attack column of the Rogue table.''',
+            'thieve\'s cant':
+    '''During your rogue training you learned thieves' cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves' cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.
+
+    In addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves' guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run.'''
+        }
+    ),
+    # TODO: spellcasting, sorcerous origins
+    'sorcerer': CharClass(
+        name='Sorcerer',
+        hit_dice=6,
+        saving_throws=['con', 'cha'],
+        available_skills=['arcana', 'deception', 'insight', 'intimidation', 'persuasion', 'religion'],
+        no_of_skills=2,
+        starting_equipment_choices=[
+            ['light crossbow, 20 bolts'] + get_weapon_keys_by_category('simple melee') + get_weapon_keys_by_category('simple ranged'),
+            ['component pouch', 'arcane focus'],
+            ['dungeoneer\'s pack', 'explorer\'s pack']
+        ],
+        starting_equipment_given=['dagger', 'dagger'],
+        gold_dice='3d4',
+        weapon_prof=['dagger', 'dart', 'sling', 'quarterstaff', 'light crossbow'],
+    ),
+    'warlock': CharClass(
+        name='Warlock',
+        hit_dice=8,
+        saving_throws=['wis', 'cha'],
+        available_skills=['arcana', 'deception', 'history', 'intimidation', 'investigation', 'nature', 'religion'],
+        no_of_skills=2,
+        starting_equipment_choices=[
+            ['light crossbow, 20 bolts'] + get_weapon_keys_by_category('simple melee') + get_weapon_keys_by_category('simple ranged'),
+            ['component pouch', 'arcane focus'],
+            ['scholar\'s pack', 'dungeoneer\'s pack']
+        ],
+        starting_equipment_given=['leather armour', 'any simple weapon', 'dagger', 'dagger'],
+        gold_dice='4d4',
+        armour_training=['light'],
+        weapon_prof=['simple melee', 'simple ranged'],
+        features={
+            'otherwordly patron': 'At 1st level, you have struck a bargain with an otherworldly being chosen from the list of available patrons. Your choice grants you features at 1st level and again at 6th, 10th, and 14th level.'
+        }
+    ),
     'wizard': CharClass(
         name="Wizard",
         hit_dice=6,
