@@ -80,6 +80,25 @@ while choosing_class:
 
 chosen_class = classes[class_choice]
 
+# Choosing skills 
+print(f'Choose {chosen_class.no_of_skills} of the following skills: ')
+
+for skill in chosen_class.available_skills:
+    print(f'-{skill}')
+
+count = 0
+while count < chosen_class.no_of_skills:
+    chosen_skill = sanitize(input(f'Skill {count+1}: '))
+
+    if chosen_skill not in chosen_class.available_skills:
+        print('Select a skill from the list above')
+    elif chosen_skill in player.skills:
+        print(f'You are already proficient in {skill}')
+    else:
+        player.skills.append(chosen_skill)
+        count += 1
+    
+
 ## STEP THREE: DETERMINE ABILITY SCORES ## 
 # Deciding whether to input ability scores manually or have them rolled randomly
 print('Do you want to manually enter your stats or have them rolled randomly?')
