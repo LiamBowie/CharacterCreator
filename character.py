@@ -95,7 +95,7 @@ class Character:
     def add_class(self, character_class, chosen_skills, chosen_equipment):
         self.character_class = character_class.name
         self.hit_dice = character_class.hit_dice
-        self.hit_points = self.hit_dice + self.get_modifier('con')
+        self.hit_points += self.hit_dice + self.get_modifier('con')
         self.saving_throws.extend(character_class.saving_throws)
         self.skills = chosen_skills
         if chosen_equipment:
