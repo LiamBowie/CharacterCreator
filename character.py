@@ -7,9 +7,9 @@ class Character:
     def __init__(self, name:str = '', level:int = 1, proficiency_bonus:int = 2, armour_class:int = 10, 
                  hit_points:int = 0, hit_dice:int = 0, ability_scores:dict = starting_scores, saving_throws:list = [],
                  skills:list = [], initiative:int = 0, race:str = '', character_class = '', size:str = '',
-                 speed:int = 0, languages:list = [],  resistances:list = [],
-                 weapon_proficiency:list = [], armour_training:list = [], tool_proficiency:list = [],
-                 spells:list = [], traits:dict = {}, equipment:list = []):
+                 speed:int = 0, languages:list = [],  resistances:list = [], weapon_proficiency:list = [], 
+                 armour_training:list = [], tool_proficiency:list = [], spells:list = [], traits:dict = {}, 
+                 equipment:list = [], starting_gold:int = 0):
         self.name = name
         self.level = level
         self.proficiency_bonus = proficiency_bonus
@@ -32,6 +32,7 @@ class Character:
         self.spells = spells
         self.traits = traits
         self.equipment = equipment
+        self.starting_gold = starting_gold
 
     def __repr__(self):
         parts = [f'{self.name.capitalize()}, level {self.level} {self.race} {self.character_class}']
