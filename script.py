@@ -1,6 +1,6 @@
 from character import Character
 from util import roll_random_ability_scores, sanitize
-from db import races, draconic_ancestries
+from db import races, draconic_ancestries, classes
 
 player = Character()
 
@@ -112,5 +112,6 @@ while deciding:
     else:
         decision = sanitize(input('Please enter "manual" or "random": '))
 
+player.add_class(classes['barbarian'], [], [])
 print('\n')
 print(player) # Debugging and testing. 
