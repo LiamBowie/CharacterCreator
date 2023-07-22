@@ -177,7 +177,33 @@ elif input_method == 'manual':
         
     player.update_ability_scores(manual_scores)
 
-    
+## STEP FOUR: DESCRIBE YOUR CHARACTER ##
+name = ''
+choosing_name = True
+while choosing_name:
+    name = input('Enter a name for your character: ').strip()
+    if name == '':
+        print('You must enter a name')
+        continue
+
+    confirm_name = sanitize(input(f'Are you happy with "{name}"? Type "y" to confirm: '))
+    if confirm_name == 'y':
+        choosing_name = False
+
+player.set_name(name)
+
+gender = ''
+choosing_gender = True
+while choosing_gender:
+    gender = input('What is your character\'s gender (press enter to skip): ').strip()
+
+    if not gender: break
+     
+    confirm_gender = sanitize(input(f'Are you happy with "{gender}"? Type "y" to confirm: '))
+    if confirm_gender == 'y':
+        choosing_gender = False
+
+player.set_gender(gender)
 
 print('\n')
 print(player) # Debugging and testing. 
