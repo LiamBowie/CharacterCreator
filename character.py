@@ -96,7 +96,6 @@ class Character:
     def add_class(self, character_class, chosen_skills, chosen_equipment):
         self.character_class = character_class.name
         self.hit_dice = character_class.hit_dice
-        self.hit_points += self.hit_dice + self.get_modifier('con')
         self.saving_throws.extend(character_class.saving_throws)
         self.skills = chosen_skills
         if chosen_equipment:
@@ -114,12 +113,17 @@ class Character:
     
     def set_armour_class(self):
         self.armour_class = 10 + self.get_modifier('dex')
+    
+    def set_hit_points(self):
+        self.hit_points += self.hit_dice + self.get_modifier('con')
 
     def update_ability_scores(self, new_scores):
         for ability in new_scores:
             self.ability_scores[ability] += new_scores[ability]
         self.set_initiative()
         self.set_armour_class()
+        self.set_hit_points()
+        
 
     def add_skill(self, skill):
         self.skills.append(skill)

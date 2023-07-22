@@ -86,6 +86,7 @@ print(f'Choose {chosen_class.no_of_skills} of the following skills: ')
 for skill in chosen_class.available_skills:
     print(f'-{skill}')
 
+skills = []
 count = 0
 while count < chosen_class.no_of_skills:
     chosen_skill = sanitize(input(f'Skill {count+1}: '))
@@ -95,7 +96,7 @@ while count < chosen_class.no_of_skills:
     elif chosen_skill in player.skills:
         print(f'You are already proficient in {skill}')
     else:
-        player.skills.append(chosen_skill)
+        skills.append(chosen_skill)
         count += 1
     
 # Choosing equipment
@@ -108,11 +109,8 @@ while choosing_gold_or_equipment:
     if gold_or_equipment == 'gold' or gold_or_equipment == 'equipment':
         choosing_gold_or_equipment = False
 
-if gold_or_equipment == 'gold':
-    player.starting_gold = roll(chosen_class.gold_dice) * 10 if chosen_class.gold_multiplier else roll(chosen_class.gold_dice)
-    print(player.starting_gold)
-
-elif gold_or_equipment == 'equipment':
+equipment = []
+if gold_or_equipment == 'equipment':
     print('Choose one of the following: ')
     for choice in chosen_class.starting_equipment_choices:
         string = ['']
@@ -127,9 +125,11 @@ elif gold_or_equipment == 'equipment':
                 print('Choose an item from the list')
             else:
                 choosing_equipment = False
-        player.equipment.append(equipment_choice)
+        equipment.append(equipment_choice)
     
-    player.equipment.extend(chosen_class.starting_equipment_given)
+    equipment.extend(chosen_class.starting_equipment_given)
+
+player.add_class(chosen_class, skills, equipment)
 
 ## STEP THREE: DETERMINE ABILITY SCORES ## 
 # Deciding whether to input ability scores manually or have them rolled randomly
