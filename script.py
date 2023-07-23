@@ -178,6 +178,7 @@ elif input_method == 'manual':
     player.update_ability_scores(manual_scores)
 
 ## STEP FOUR: DESCRIBE YOUR CHARACTER ##
+#Name
 name = ''
 choosing_name = True
 while choosing_name:
@@ -192,6 +193,19 @@ while choosing_name:
 
 player.set_name(name)
 
+# Age
+age:int
+choosing_age = True
+while choosing_age:
+    try:
+        age = int(input('How old is your adventurer?: '))
+        choosing_age = False
+    except ValueError:
+        print('You must enter a number')
+
+player.set_age(age)
+
+# Gender
 gender = ''
 choosing_gender = True
 while choosing_gender:

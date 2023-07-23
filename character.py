@@ -4,7 +4,7 @@ from util import roll
 starting_scores = {'str': 0, 'dex': 0, 'con': 0, 'wis': 0, 'int': 0, 'cha': 0}
 
 class Character:
-    def __init__(self, name:str = '', gender:str = '', level:int = 1, proficiency_bonus:int = 2, armour_class:int = 10, 
+    def __init__(self, name:str = '', gender:str = '', age:int = 0, level:int = 1, proficiency_bonus:int = 2, armour_class:int = 10, 
                  hit_points:int = 0, hit_dice:int = 0, ability_scores:dict = starting_scores, saving_throws:list = [],
                  skills:list = [], initiative:int = 0, race:str = '', character_class = '', size:str = '',
                  speed:int = 0, languages:list = [],  resistances:list = [], weapon_proficiency:list = [], 
@@ -12,6 +12,7 @@ class Character:
                  equipment:list = [], starting_gold:int = 0):
         self.name = name
         self.gender = gender
+        self.age = age
         self.level = level
         self.proficiency_bonus = proficiency_bonus
         self.armour_class = armour_class
@@ -37,7 +38,7 @@ class Character:
 
     def __repr__(self):
         parts = [f'{self.name.capitalize()}, level {self.level} {self.gender} {self.race} {self.character_class}']
-        parts.append(f'{self.size.capitalize()} creature')
+        parts.append(f'{self.size.capitalize()} creature, age: {self.age}')
         parts.append(f'AC: {self.armour_class}, Initiative: {"+" if self.get_modifier("dex") >= 0 else ""}{self.initiative}, Speed: {self.speed}ft, HP: {self.hit_points}')
         parts.append(f'Hit dice: d{self.hit_dice} Proficiency bonus: +{self.proficiency_bonus}') 
         for ability in self.ability_scores:
@@ -124,6 +125,12 @@ class Character:
 
     def set_gender(self, new_gender:str):
         self.gender = new_gender
+    
+    def set_age(self, new_age):
+        if type(new_age) is int:
+            self.age = new_age
+        else:
+            print('Age must be an integer')
 
     def update_ability_scores(self, new_scores):
         for ability in new_scores:
