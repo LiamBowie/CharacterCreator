@@ -654,7 +654,7 @@ classes = {
         name='Bard',
         hit_dice=8,
         saving_throws=['dex', 'cha'],
-        available_skills=["acrobatics", "animal Handling", "arcana", "athletics", "deception", "history", "insight", "intimidation", "investigation", "medicine", "nature", "perception", "performance", "persuasion", "religion", "sleight of Hand", "stealth", "survival"],
+        available_skills=["acrobatics", "animal Handling", "arcana", "athletics", "deception", "history", "insight", "intimidation", "investigation", "medicine", "nature", "perception", "performance", "persuasion", "religion", "sleight of hand", "stealth", "survival"],
         no_of_skills=3,
         starting_equipment_choices=[
             ['rapier', 'longsword'] + get_weapon_keys_by_category('simple melee') + get_weapon_keys_by_category('simple ranged'),
