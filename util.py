@@ -1,4 +1,5 @@
 import random
+import os
 
 def roll_random_ability_scores():
     ability_scores = {'str': 0, 'dex': 0, 'con': 0, 'wis': 0, 'int': 0, 'cha': 0}
@@ -38,3 +39,6 @@ def remove_item_from_list(item_to_remove, list):
 
 def sanitize(input):
     return input.lower().strip()
+
+def clear(): 
+    os.system('cls')

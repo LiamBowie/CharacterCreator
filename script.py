@@ -1,10 +1,11 @@
 from character import Character
-from util import roll_random_ability_scores, sanitize, roll
+from util import roll_random_ability_scores, sanitize, clear
 from db import races, draconic_ancestries, classes
 
 player = Character()
 
 ## STEP ONE: CHOOSING A RACE ## 
+clear()
 print('Amidst the vast expanse of fantasy, which race shall thee assume on this odyssey? Choose wisely, for destiny eagerly awaits your decision.')
 # List the available races
 for race in races:
@@ -26,6 +27,7 @@ while(choosing_race):
 race_choice = races[race_choice]
 
 # Switch statement handles ay unique cases when adding a race to a character
+clear()
 match race_choice.name:
     case 'Dragonborn':
         print('Reveal your Draconic Ancestry. The power of your lineage awaits your answer. Available anceestries: ')
@@ -65,6 +67,7 @@ match race_choice.name:
         player.add_race(race_choice)
 
 ## STEP TWO: CHOOSE A CLASS ##
+clear()
 print('Descriptive text about choosing classes')
 for c in classes:
     print(f'- {c.capitalize()}')
@@ -81,6 +84,7 @@ while choosing_class:
 chosen_class = classes[class_choice]
 
 # Choosing skills 
+clear()
 print(f'Choose {chosen_class.no_of_skills} of the following skills: ')
 
 for skill in chosen_class.available_skills:
@@ -100,6 +104,7 @@ while count < chosen_class.no_of_skills:
         count += 1
     
 # Choosing equipment
+clear()
 print('Would you like to choose your starting equipment or recieve starting gold?')
 choosing_gold_or_equipment = True
 gold_or_equipment = ''
@@ -133,6 +138,7 @@ player.add_class(chosen_class, skills, equipment)
 
 ## STEP THREE: DETERMINE ABILITY SCORES ## 
 # Deciding whether to input ability scores manually or have them rolled randomly
+clear()
 print('Do you want to manually enter your stats or have them rolled randomly?')
 choosing_method = True
 input_method = ''
@@ -150,7 +156,7 @@ if input_method == 'random':
 
 # Manually enter scores 
 elif input_method == 'manual':
-
+    clear()
     print('Roll 4d6 and add the three highest together to obtain your ability scores.')
     manual_scores = {'str': 0, 'dex': 0, 'con': 0, 'wis': 0, 'int': 0, 'cha': 0}
     score_text = {
@@ -179,6 +185,7 @@ elif input_method == 'manual':
 
 ## STEP FOUR: DESCRIBE YOUR CHARACTER ##
 #Name
+clear()
 name = ''
 choosing_name = True
 while choosing_name:
@@ -194,6 +201,8 @@ while choosing_name:
 player.set_name(name)
 
 # Age
+clear()
+print(race_choice.lifespan)
 age:int
 choosing_age = True
 while choosing_age:
@@ -206,6 +215,7 @@ while choosing_age:
 player.set_age(age)
 
 # Gender
+clear()
 gender = ''
 choosing_gender = True
 while choosing_gender:
@@ -219,5 +229,5 @@ while choosing_gender:
 
 player.set_gender(gender)
 
-print('\n')
+clear()
 print(player) # Debugging and testing. 
