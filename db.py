@@ -71,7 +71,7 @@ races = {
         'high elf': Race(
             race_name='High Elf', 
             ability_score_increase={'dex': 2, 'int': 1},
-            size='mediuem', 
+            size='medium', 
             speed=30,
             lifespan='Although elves reach physical maturity at about the same age as humans, the elven understanding of adulthood goes beyond physical growth to encompass worldly experience. An elf typically claims adulthood and an adult name around the age of 100 and can live to be 750 years old.',
             languages=['common', 'elvish'],
