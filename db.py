@@ -798,11 +798,11 @@ classes = {
         name='Ranger',
         hit_dice=10,
         saving_throws=['str', 'dex'],
-        available_skills=['animal handling', 'athletics', 'insignt', 'investigation', 'nature', 'perception', 'stealth', 'survival'],
+        available_skills=['animal handling', 'athletics', 'insight', 'investigation', 'nature', 'perception', 'stealth', 'survival'],
         no_of_skills=3,
         starting_equipment_choices=[
             ['scale mail', 'leather armour'], 
-            ['two shortdwords', 'two simple melee weapons'],
+            ['two shortswords', 'two simple melee weapons'],
             ['dungeoneer\'s pack', 'explorer\'s pack']
         ],
         starting_equipment_given=['longbow', '20 arrows'],
